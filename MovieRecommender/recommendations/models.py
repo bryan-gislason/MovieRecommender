@@ -30,17 +30,13 @@ class Movie(models.Model):
     western = models.BooleanField()
 
 
-class UserProfile(models.Model):
-    # This field is required.
-    user = models.OneToOneField(User)
-    rating = models.ForeignKey('Rating')
-
-
 class Similarity(models.Model):
-    movie_id = models.IntegerField(primary_key=True)
+    movie_id = models.IntegerField(primary_key=True) 
     value = models.FloatField()
 
 
 class Rating(models.Model):
-    movie_id = models.IntegerField(primary_key=True)
-    value = models.FloatField()
+    user = models.ForeignKey(User, primary_key=True)
+    movie_id = models.IntegerField()
+    rating = models.FloatField(null=True)
+    suggested_rating = models.FloatField(null=True)

@@ -8,7 +8,7 @@ class Movie(models.Model):
     release_date = models.DateField()
     video_release_date = models.DateField()
     imbd_url = models.CharField(max_length=255)
-    similarity = models.ManyToManyField('Similarity')
+    similarity = models.ManyToManyField('Similarity', null=True)
     unknown = models.BooleanField()
     action = models.BooleanField()
     adventure = models.BooleanField()

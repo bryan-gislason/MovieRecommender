@@ -1,0 +1,2 @@
+from recommendations.models import *
+

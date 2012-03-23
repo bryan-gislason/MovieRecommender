@@ -65,6 +65,8 @@ class Command(BaseCommand):
 			movie_ratings = self.get_movie_ratings(data)
 			self.pearson_correlation(movie_ratings)
 
+			return
+
 			# get users and their ratings
 			#for line in range(int(self._ratings)):
 			#	self.add_data_row_to_db(data.readline())
@@ -189,6 +191,7 @@ class Command(BaseCommand):
 					)
 
 					Movie.objects.get(pk=mov2_i).similarity.add(sim)
+		return
 
 	def add_data_row_to_db(self, row):
 		from recommendations.models import UserProfile, Rating 

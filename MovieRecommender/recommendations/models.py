@@ -36,7 +36,7 @@ class Similarity(models.Model):
 
 
 class Rating(models.Model):
-    user = models.ForeignKey(User, primary_key=True)
+    user = models.ForeignKey(User)
     movie_id = models.IntegerField()
     rating = models.FloatField(null=True)
     suggested_rating = models.FloatField(null=True)

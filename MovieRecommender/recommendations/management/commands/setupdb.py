@@ -86,7 +86,7 @@ class Command(BaseCommand):
 		except Movie.DoesNotExist:
 			movie = Movie.objects.get_or_create(
 	            movie_id=row[0],
-	            title = unicode(row[1].strip().split(' ')[:-1][0], 'latin-1'),
+	            title = unicode(" ".join(row[1].strip().split(' ')[:-1]), 'latin-1'),
 			    release_date = datetime.date(int(release_date),	1, 1),
 			    video_release_date = datetime.date(
 							    		int(video_release_date[2]),
@@ -179,18 +179,13 @@ class Command(BaseCommand):
 				result = Decimal(top_sum) / Decimal(sqrt(x_bot_sum)*sqrt(y_bot_sum))
 
 				print "sim %s, %s = %f" % (movie_id, mov2_i, result)
-				
-				try:
-					sim = Similarity.objects.get(
-						movie_id = movie_id
-					)
-				except Similarity.DoesNotExist:
-					sim = Similarity.objects.create(
+				movie = Movie.objects.get(pk=mov2_i)
+				sim, res = Similarity.objects.get_or_create(
+						from_movie = movie,
 						movie_id = movie_id,
 						value = result
 					)
 
-					Movie.objects.get(pk=mov2_i).similarity.add(sim)
 		return
 
 	def add_data_row_to_db(self, row):

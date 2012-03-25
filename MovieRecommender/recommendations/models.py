@@ -8,7 +8,6 @@ class Movie(models.Model):
     release_date = models.DateField()
     video_release_date = models.DateField()
     imbd_url = models.CharField(max_length=255)
-    similarity = models.ManyToManyField('Similarity', null=True)
     unknown = models.BooleanField()
     action = models.BooleanField()
     adventure = models.BooleanField()
@@ -31,7 +30,8 @@ class Movie(models.Model):
 
 
 class Similarity(models.Model):
-    movie_id = models.IntegerField(primary_key=True) 
+    from_movie = models.ForeignKey(Movie)
+    movie_id = models.IntegerField() 
     value = models.FloatField()
 
 
